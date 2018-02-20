@@ -14,7 +14,11 @@ import nu.te4.support.ConnectionFactory;
 @Stateless
 public class PlateBean {
     
-    public String database_server = "plateapp_server";
+    public String database_server;
+
+    public PlateBean() {
+       database_server = "plateapp_server";
+    }
 
     public void setDatabase_server(String database_server) {
         this.database_server = database_server;
@@ -43,6 +47,7 @@ public class PlateBean {
             stmt.setInt(1, plate_id);  
             stmt.setInt(2, user_id);  
             stmt.executeUpdate();
+            connection.close();
             return 201;
         } catch (Exception e) {
             System.out.println("Error (addPlate): "+e.getMessage());
@@ -64,6 +69,7 @@ public class PlateBean {
             stmt.setInt(1, plate_id);  
             stmt.setInt(2, user_id);  
             stmt.executeUpdate();
+            connection.close();
             return 202;
         } catch (Exception e) {
             return 500;
